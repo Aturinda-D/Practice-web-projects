@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        @import url(./styles/styles.css);
+    </style>
+    <script src="./scripts/index.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h2>todo app</h2>
+            <form>
+                <input type="text" name="new-item" id="new-task" placeholder="Add new todo item">
+                <button type="submit">+</button>
+            </form>
+            <div id="todo-items">
+                <!-- <div class="todo-item">
+                    <span>Buy a new gaming laptop and play</span>
+                    <div class="todo-item-modify">
+                        <button class="edit-button"><span class="material-icons">edit</span></button>
+                        <button class="delete-button"><span class="material-icons">delete</span></button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="analytics">
+                <p>You have <span>0</span> pending tasks</p>
+                <button id="clear-all">clear all</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

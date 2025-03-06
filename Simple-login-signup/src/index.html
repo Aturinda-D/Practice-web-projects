@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login/Signup</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./srcipts/index.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="form-wrapper">
+            <h3>login</h3>
+            <form>
+                <label>username</label>
+                <input type="text" name="username" placeholder="Enter username" required>
+                <label>password</label>
+                <span>
+                    <input type="password" name="password" placeholder="Enter password" id="password-field" required>
+                    <input type="button" value="show" id="hideShow">
+                </span>
+                <p>Don't have an account? <a href="./signup/signup.html">Sign up</a></p>
+                <input type="submit" value="login">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

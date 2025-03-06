@@ -1,0 +1,146 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: larger;
+    background-image: linear-gradient(to top, rgb(0, 100, 255), rgb(0, 255, 230));
+    background-repeat: no-repeat;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 400px;
+    min-height: 500px;
+    padding: 0 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container h2{
+    margin-top: 35px;
+    text-transform: capitalize;
+    font-weight: bolder;
+    font-size: xx-large
+}
+
+form {
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: auto 50px;
+    gap: 5px;
+}
+
+input {
+    padding: 10px;
+    outline: none;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: large;
+}
+
+input:focus {
+    border: 2px solid rgb(150, 0, 255);
+    background-color: rgba(150, 0, 255, 0.05);
+}
+
+form button{
+    border: none;
+    border-radius: 3px;
+    font-weight: bolder;
+    font-size: 30px;
+    color: #ffffff;
+    background-color: rgb(150, 0, 255);
+}
+button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#todo-items {
+    height: 260px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+#todo-items::-webkit-scrollbar {
+    display: none;
+}
+
+.todo-item {
+    height: 50px;
+    padding-left: 20px;
+    line-height: 50px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ededed;
+    display: grid;
+    grid-template-columns: minmax(0, 94%) auto;
+}
+.todo-item:hover {
+    cursor: pointer;
+}
+
+.todo-item span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.edit-input {
+    width: 100%;
+    border: none;
+}
+
+.todo-item-modify {
+    height: inherit;
+    width: 0;
+    justify-self: right;
+    border-radius: 5px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+    transition: width 0.5s;
+}
+.edit-button{
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(0, 150, 255);
+}
+.delete-button{
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 50, 100);
+}
+.material-icons {
+    color: #ffffff;
+    border: none;
+}
+
+.analytics {
+    margin: 0 0 10px 0;
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+.analytics button{
+    height: 40px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-transform: capitalize;
+    font-size: large;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: rgb(150, 0, 255);
+}
