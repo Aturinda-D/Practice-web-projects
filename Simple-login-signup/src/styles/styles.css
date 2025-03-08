@@ -10,15 +10,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d9d9d9;
+    background-image: linear-gradient(to bottom, #fdd, #ddf);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .form-wrapper {
     width: 350px;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 5px 0 #aaa;
 }
 
@@ -27,7 +27,12 @@ body {
     text-transform: uppercase;
     font-weight: lighter;
     font-size: 20px;
-    margin: 20px 0;
+    margin: 20px auto;
+    padding:  10px 20px;
+    width: fit-content;
+    border-radius: 0 0 10px 10px;
+    color: #ffffff;
+    background-color: black;
 }
 
 form {
@@ -57,27 +62,31 @@ form label {
 }
 
 #hideShow {
-    background-color: rgba(0, 0, 0, 0);
     height: inherit;
+    line-height: 30px;
     border: none;
-    text-transform: uppercase;
-    font-style: normal;
-    font-size: .8em;
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 5px;
     transform: translateY(-50%);
-}
-
-[type = "submit"] {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-style: normal;
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
+    color: rgb(150, 20, 225);
 }
 a:hover {
     text-decoration: underline;
+}
+
+.log {
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: normal;
+    color: #ffffff;
+    background-color: black;
 }
