@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking system - Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../styles/home.css">
+    <script src="../scripts/index.js" defer></script>
+</head>
+<body>
+    <header>
+        <h3>
+            <span class="material-icons">payments</span>
+            Simple Banking System
+        </h3>
+        <button id="logout">Log out</button>
+    </header>
+    <main>
+        <section>
+            <div class="hero">
+                <h1>Balance: $<span id="account-balance">25,000</span></h1>
+                <p>Number of transactions: <span id="num-of-transations">14</span></p>
+                <p>Last transaction date: <span id="last-transaction-date">March 8th, 2025</span></p>
+                <p>Last transaction time: <span id="last-transaction-time">2:38 pm</span></p>
+            </div>
+            <div class="actions">
+                <div class="input-form deposit">
+                    <form>
+                        <input type="number" name="deposit-amount" id="deposit-amount">
+                        <button>deposit</button>
+                    </form>
+                </div>
+                <button id="deposit">Make a deposit</button>
+                <div class="input-form withdraw">
+                    <form>
+                        <input type="number" name="withdraw-amount" id="withdraw-amount">
+                        <button>withdraw</button>
+                    </form>
+                </div>
+                <button id="withdraw">Make a withdrawal</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
