@@ -25,7 +25,7 @@ main {
     justify-content: center;
     align-items: center;
 }
-.container {
+#container {
     width: 500px;
     height: 500px;
     border: 5px inset rgba(50, 50, 50, .3);
@@ -56,9 +56,6 @@ main {
     justify-content: center;
     align-items: center;
     backface-visibility: hidden;
-}
-.card:hover {
-    transform: perspective(200px) rotateY(180deg);
 }
 .back {
     transform: rotateY(180deg);
