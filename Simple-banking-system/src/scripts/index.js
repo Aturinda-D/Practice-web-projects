@@ -15,14 +15,19 @@ const checkInputs = () => {
 }
 
 function toggleForm(button) {
+    let form;
+    let other;
     if (button.id === "deposit"){
         form = depositForm;
+        other = withdrawForm;
     } else if (button.id === "withdraw") {
         form = withdrawForm;
+        other = depositForm;
     }
     switch (form.style.display) {
         case "none":
             form.style.display = "block";
+            other.style.display = 'none';
             break;
         default:
             form.style.display = "none";
