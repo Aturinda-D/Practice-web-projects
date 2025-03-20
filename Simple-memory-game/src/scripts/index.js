@@ -5,6 +5,12 @@ let visible = [];
 const fruits = ['apple', 'orange', 'banana', 'grapes', 'pineapple', 'watermelon', 'strawberry', 'avocado'];
 let randomizedFruits = [];
 
+function checkMatch() {
+    const item1 = visible[0].querySelector('.back img').alt;
+    const item2 = visible[1].querySelector('.back img').alt;
+    return (item1===item2)?true:false;
+}
+
 function findAll(item, array) {
     let discovered = [];
     for (const element of array) {
@@ -46,7 +52,10 @@ for (const fruit of randomizedFruits) {
                 visible.splice(visible.indexOf(card), 1);
                 break;
         }
-        if (visible.length >= 2) {
+        if (visible.length >=2 && checkMatch()) {
+            console.log("It's a match!!");
+            visible.splice(0);
+        } else if (visible.length >= 2 ) {
             attempts++;
             showAttempts.innerHTML = attempts;
             setTimeout(()=>{
