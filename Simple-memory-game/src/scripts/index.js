@@ -2,8 +2,27 @@ const container = document.getElementById("container");
 const showAttempts = document.getElementById("attempts");
 let attempts = 0;
 let visible = [];
+const fruits = ['apple', 'orange', 'banana', 'grapes', 'pineapple', 'watermelon', 'strawberry', 'avocado'];
+let randomizedFruits = [];
 
-for (let i=1; i<=16; i++) {
+function findAll(item, array) {
+    let discovered = [];
+    for (const element of array) {
+        if (element===item) {
+            discovered.push(element);
+        }
+    }
+    return discovered;
+}
+
+while (randomizedFruits.length < 16) {
+    const index = Math.floor(Math.random()*fruits.length);
+    if (findAll(fruits[index], randomizedFruits).length<2) {
+        randomizedFruits.push(fruits[index]);
+    }
+}
+
+for (const fruit of randomizedFruits) {
     const card = document.createElement('div');
     card.className = "card";
     card.style.transform = "rotateY(0deg)";
@@ -12,7 +31,7 @@ for (let i=1; i<=16; i++) {
             <h2>FRONT</h2>
         </div>
         <div class="face back">
-            <h2>BACK</h2>
+            <img src="../assets/${fruit}.png" alt="${fruit}"/>
         </div>
     `;
     container.appendChild(card);
