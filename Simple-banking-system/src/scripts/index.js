@@ -160,5 +160,12 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
   });
   if (userInfo) {
     updateInfo();
+  } else {
+    const userInfo = {
+      balance: 0,
+      transactionCount: 0,
+      transactionHistory: [],
+    };
+    localStorage.setItem("user-account", JSON.stringify(userInfo));
   }
 }
