@@ -2,42 +2,6 @@ let userInfo = JSON.parse(localStorage.getItem("user-account"));
 const depositForm = document.querySelector(".deposit");
 const withdrawForm = document.querySelector(".withdraw");
 
-userInfo.transactionHistory = [
-  {
-    type: "Withdraw",
-    amount: 2000,
-    date: "March 21, 2025",
-    time: "5:57 PM",
-  },
-  {
-    type: "Deposit",
-    amount: 7000,
-    date: "March 21, 2025",
-    time: "5:54 PM",
-  },
-  {
-    type: "Deposit",
-    amount: 5000,
-    date: "March 8th, 2025",
-    time: "2:37 pm",
-  },
-  {
-    type: "Withdraw",
-    amount: 10000,
-    date: "March 3rd, 2025",
-    time: "11:40 am",
-  },
-  {
-    type: "Deposit",
-    amount: 30000,
-    date: "February 14th, 2025",
-    time: "5:13 pm",
-  },
-];
-userInfo.transactionCount = userInfo.transactionHistory.length;
-userInfo.balance = 30000;
-localStorage.setItem("user-account", JSON.stringify(userInfo));
-
 const checkInputs = () => {
   if (username.value && password.value) {
     window.location.href = "/Simple-banking-system/src/home/home.html";
