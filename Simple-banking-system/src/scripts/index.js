@@ -1,41 +1,42 @@
-const loginButton = document.querySelector("[type = 'submit']");
-const logoutButton = document.getElementById("logout");
-const username = document.getElementById("username");
-const password = document.getElementById("password");
-
-const depositButton = document.getElementById("deposit");
-const withdrawButton = document.getElementById("withdraw");
+let userInfo = JSON.parse(localStorage.getItem("user-account"));
 const depositForm = document.querySelector(".deposit");
 const withdrawForm = document.querySelector(".withdraw");
 
-// localStorage.setItem(
-//   "user-account",
-//   JSON.stringify({
-//     balance: 25000,
-//     transactionCount: 3,
-//     transactionHistory: [
-//       {
-//         type: "Deposit",
-//         amount: 5000,
-//         date: "March 8th, 2025",
-//         time: "2:37 pm",
-//       },
-//       {
-//         type: "Withdraw",
-//         amount: 10000,
-//         date: "March 3rd, 2025",
-//         time: "11:40 am",
-//       },
-//       {
-//         type: "Deposit",
-//         amount: 30000,
-//         date: "February 14th, 2025",
-//         time: "5:13 pm",
-//       },
-//     ],
-//   })
-// );
-let userInfo = JSON.parse(localStorage.getItem("user-account"));
+userInfo.transactionHistory = [
+  {
+    type: "Withdraw",
+    amount: 2000,
+    date: "March 21, 2025",
+    time: "5:57 PM",
+  },
+  {
+    type: "Deposit",
+    amount: 7000,
+    date: "March 21, 2025",
+    time: "5:54 PM",
+  },
+  {
+    type: "Deposit",
+    amount: 5000,
+    date: "March 8th, 2025",
+    time: "2:37 pm",
+  },
+  {
+    type: "Withdraw",
+    amount: 10000,
+    date: "March 3rd, 2025",
+    time: "11:40 am",
+  },
+  {
+    type: "Deposit",
+    amount: 30000,
+    date: "February 14th, 2025",
+    time: "5:13 pm",
+  },
+];
+userInfo.transactionCount = userInfo.transactionHistory.length;
+userInfo.balance = 30000;
+localStorage.setItem("user-account", JSON.stringify(userInfo));
 
 const checkInputs = () => {
   if (username.value && password.value) {
@@ -81,11 +82,12 @@ function updateInfo() {
   transactionsDisplay.innerHTML = userInfo.transactionCount;
   lastTransactionDate.innerHTML = userInfo.transactionHistory[0].date;
   lastTransactionTime.innerHTML = userInfo.transactionHistory[0].time;
+  tableContent.innerHTML = "";
   for (const transaction of userInfo.transactionHistory) {
     const item = document.createElement("tr");
     item.innerHTML = `
       <td>${transaction.type}</td>
-      <td>${transaction.amount}</td>
+      <td>${transaction.amount.toLocaleString()}</td>
       <td>${transaction.date}</td>
       `;
     tableContent.appendChild(item);
@@ -93,6 +95,9 @@ function updateInfo() {
 }
 
 if (window.location.pathname === "/Simple-banking-system/src/index.html") {
+  const loginButton = document.querySelector("[type = 'submit']");
+  const username = document.getElementById("username");
+  const password = document.getElementById("password");
   loginButton.addEventListener("click", (e) => {
     e.preventDefault();
     checkInputs();
@@ -100,6 +105,10 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
 } else if (
   window.location.pathname === "/Simple-banking-system/src/home/home.html"
 ) {
+  const logoutButton = document.getElementById("logout");
+  const depositButton = document.getElementById("deposit");
+  const withdrawButton = document.getElementById("withdraw");
+
   logoutButton.addEventListener("click", () => {
     window.location.href = "/Simple-banking-system/src/index.html";
   });
@@ -112,38 +121,44 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
   depositForm.querySelector("button").addEventListener("click", (e) => {
     e.preventDefault();
     const deposit = document.getElementById("deposit-amount");
-    const amount = parseInt(deposit.value ? deposit.value : 0);
-    const [date, time] = fetchDateTime();
-    userInfo.balance += amount;
-    userInfo.transactionCount++;
-    userInfo.transactionHistory.unshift({
-      type: "Deposit",
-      amount: amount,
-      date: date,
-      time: time,
-    });
-    localStorage.setItem("user-account", JSON.stringify(userInfo));
-    updateInfo();
-    deposit.value = null;
-  });
-  withdrawForm.querySelector("button").addEventListener("click", (e) => {
-    e.preventDefault();
-    const withdraw = document.getElementById("withdraw-amount");
-    const amount = parseInt(withdraw.value ? withdraw.value : 0);
-    const [date, time] = fetchDateTime();
-    if (amount <= userInfo.balance) {
-      userInfo.balance -= amount;
+    if (deposit.value) {
+      const amount = parseInt(deposit.value);
+      const [date, time] = fetchDateTime();
+      userInfo.balance += amount;
       userInfo.transactionCount++;
       userInfo.transactionHistory.unshift({
-        type: "Withdraw",
+        type: "Deposit",
         amount: amount,
         date: date,
         time: time,
       });
       localStorage.setItem("user-account", JSON.stringify(userInfo));
       updateInfo();
-      withdraw.value = null;
+      deposit.value = null;
     }
   });
-  updateInfo();
+  withdrawForm.querySelector("button").addEventListener("click", (e) => {
+    e.preventDefault();
+    const withdraw = document.getElementById("withdraw-amount");
+    if (withdraw.value) {
+      const amount = parseInt(withdraw.value);
+      const [date, time] = fetchDateTime();
+      if (amount <= userInfo.balance) {
+        userInfo.balance -= amount;
+        userInfo.transactionCount++;
+        userInfo.transactionHistory.unshift({
+          type: "Withdraw",
+          amount: amount,
+          date: date,
+          time: time,
+        });
+        localStorage.setItem("user-account", JSON.stringify(userInfo));
+        updateInfo();
+        withdraw.value = null;
+      }
+    }
+  });
+  if (userInfo) {
+    updateInfo();
+  }
 }
