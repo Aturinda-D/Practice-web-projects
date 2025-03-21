@@ -113,8 +113,15 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
     e.preventDefault();
     const deposit = document.getElementById("deposit-amount");
     const amount = parseInt(deposit.value ? deposit.value : 0);
+    const [date, time] = fetchDateTime();
     userInfo.balance += amount;
     userInfo.transactionCount++;
+    userInfo.transactionHistory.unshift({
+      type: "Deposit",
+      amount: amount,
+      date: date,
+      time: time,
+    });
     localStorage.setItem("user-account", JSON.stringify(userInfo));
     updateInfo();
     deposit.value = null;
@@ -123,9 +130,16 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
     e.preventDefault();
     const withdraw = document.getElementById("withdraw-amount");
     const amount = parseInt(withdraw.value ? withdraw.value : 0);
+    const [date, time] = fetchDateTime();
     if (amount <= userInfo.balance) {
       userInfo.balance -= amount;
       userInfo.transactionCount++;
+      userInfo.transactionHistory.unshift({
+        type: "Withdraw",
+        amount: amount,
+        date: date,
+        time: time,
+      });
       localStorage.setItem("user-account", JSON.stringify(userInfo));
       updateInfo();
       withdraw.value = null;
