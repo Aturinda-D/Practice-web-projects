@@ -8,7 +8,30 @@ const withdrawButton = document.getElementById("withdraw");
 const depositForm = document.querySelector(".deposit");
 const withdrawForm = document.querySelector(".withdraw");
 
-// localStorage.setItem("user-account", JSON.stringify({ balance: 25000 }));
+// localStorage.setItem(
+//   "user-account",
+//   JSON.stringify({
+//     balance: 25000,
+//     transactionCount: 3,
+//     transactionHistory: [
+//       {
+//         type: "Deposit",
+//         amount: 30000,
+//         date: "February 14th, 2025",
+//       },
+//       {
+//         type: "Withdraw",
+//         amount: 10000,
+//         date: "March 3rd, 2025",
+//       },
+//       {
+//         type: "Deposit",
+//         amount: 5000,
+//         date: "March 8th, 2025",
+//       },
+//     ],
+//   })
+// );
 let userInfo = JSON.parse(localStorage.getItem("user-account"));
 
 const checkInputs = () => {
@@ -38,10 +61,18 @@ function toggleForm(button) {
   }
 }
 
-function updateBalance() {
+function fetchDateTime() {
+  return new Date()
+    .toLocaleString("en-US", { dateStyle: "long", timeStyle: "short" })
+    .split(" at ");
+}
+
+function updateInfo() {
   const userInfo = JSON.parse(localStorage.getItem("user-account"));
   const balanceDisplay = document.getElementById("account-balance");
+  const transactionsDisplay = document.getElementById("num-of-transations");
   balanceDisplay.innerHTML = userInfo.balance.toLocaleString();
+  transactionsDisplay.innerHTML = userInfo.transactionCount;
 }
 
 if (window.location.pathname === "/Simple-banking-system/src/index.html") {
@@ -66,8 +97,9 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
     const deposit = document.getElementById("deposit-amount");
     const amount = parseInt(deposit.value ? deposit.value : 0);
     userInfo.balance += amount;
+    userInfo.transactionCount++;
     localStorage.setItem("user-account", JSON.stringify(userInfo));
-    updateBalance();
+    updateInfo();
     deposit.value = null;
   });
   withdrawForm.querySelector("button").addEventListener("click", (e) => {
@@ -76,9 +108,11 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
     const amount = parseInt(withdraw.value ? withdraw.value : 0);
     if (amount <= userInfo.balance) {
       userInfo.balance -= amount;
+      userInfo.transactionCount++;
       localStorage.setItem("user-account", JSON.stringify(userInfo));
-      updateBalance();
+      updateInfo();
       withdraw.value = null;
     }
   });
+  updateInfo();
 }
