@@ -18,16 +18,19 @@ const withdrawForm = document.querySelector(".withdraw");
 //         type: "Deposit",
 //         amount: 5000,
 //         date: "March 8th, 2025",
+//         time: "2:37 pm",
 //       },
 //       {
 //         type: "Withdraw",
 //         amount: 10000,
 //         date: "March 3rd, 2025",
+//         time: "11:40 am",
 //       },
 //       {
 //         type: "Deposit",
 //         amount: 30000,
 //         date: "February 14th, 2025",
+//         time: "5:13 pm",
 //       },
 //     ],
 //   })
@@ -71,9 +74,13 @@ function updateInfo() {
   const userInfo = JSON.parse(localStorage.getItem("user-account"));
   const balanceDisplay = document.getElementById("account-balance");
   const transactionsDisplay = document.getElementById("num-of-transations");
+  const lastTransactionDate = document.getElementById("last-transaction-date");
+  const lastTransactionTime = document.getElementById("last-transaction-time");
   const tableContent = document.querySelector(".tables table tbody");
   balanceDisplay.innerHTML = userInfo.balance.toLocaleString();
   transactionsDisplay.innerHTML = userInfo.transactionCount;
+  lastTransactionDate.innerHTML = userInfo.transactionHistory[0].date;
+  lastTransactionTime.innerHTML = userInfo.transactionHistory[0].time;
   for (const transaction of userInfo.transactionHistory) {
     const item = document.createElement("tr");
     item.innerHTML = `
@@ -84,11 +91,6 @@ function updateInfo() {
     tableContent.appendChild(item);
   }
 }
-// {/* <tr>
-//               <td>Deposit</td>
-//               <td>5,000</td>
-//               <td>March 8th, 2025</td>
-//             </tr> */}
 
 if (window.location.pathname === "/Simple-banking-system/src/index.html") {
   loginButton.addEventListener("click", (e) => {
