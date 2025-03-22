@@ -43,18 +43,20 @@ function updateInfo() {
   const lastTransactionTime = document.getElementById("last-transaction-time");
   const tableContent = document.querySelector(".tables table tbody");
   balanceDisplay.innerHTML = userInfo.balance.toLocaleString();
-  transactionsDisplay.innerHTML = userInfo.transactionCount;
-  lastTransactionDate.innerHTML = userInfo.transactionHistory[0].date;
-  lastTransactionTime.innerHTML = userInfo.transactionHistory[0].time;
-  tableContent.innerHTML = "";
-  for (const transaction of userInfo.transactionHistory) {
-    const item = document.createElement("tr");
-    item.innerHTML = `
+  transactionsDisplay.innerHTML = userInfo.transactionHistory.length;
+  if (userInfo.transactionHistory.length > 0) {
+    lastTransactionDate.innerHTML = userInfo.transactionHistory[0].date;
+    lastTransactionTime.innerHTML = userInfo.transactionHistory[0].time;
+    tableContent.innerHTML = "";
+    for (const transaction of userInfo.transactionHistory) {
+      const item = document.createElement("tr");
+      item.innerHTML = `
       <td>${transaction.type}</td>
       <td>${transaction.amount.toLocaleString()}</td>
       <td>${transaction.date}</td>
       `;
-    tableContent.appendChild(item);
+      tableContent.appendChild(item);
+    }
   }
 }
 
@@ -122,14 +124,12 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
       }
     }
   });
-  if (userInfo) {
-    updateInfo();
-  } else {
+  if (!userInfo) {
     const userInfo = {
       balance: 0,
-      transactionCount: 0,
       transactionHistory: [],
     };
     localStorage.setItem("user-account", JSON.stringify(userInfo));
   }
+  updateInfo();
 }
