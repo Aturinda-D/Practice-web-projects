@@ -100,7 +100,12 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
       });
       localStorage.setItem("user-account", JSON.stringify(userInfo));
       updateInfo();
+      alert(
+        `Transaction complete!\nSuccessfully deposited \$${deposit.value} to your account`
+      );
       deposit.value = null;
+    } else {
+      alert("Please enter amount to deposit!");
     }
   });
   withdrawForm.querySelector("button").addEventListener("click", (e) => {
@@ -120,8 +125,16 @@ if (window.location.pathname === "/Simple-banking-system/src/index.html") {
         });
         localStorage.setItem("user-account", JSON.stringify(userInfo));
         updateInfo();
+        alert(
+          `Transaction complete!\nSuccessfully withdrawn \$${withdraw.value} from your account`
+        );
+        withdraw.value = null;
+      } else {
+        alert("Transaction failed! \nReason:    Insufficient balance");
         withdraw.value = null;
       }
+    } else {
+      alert("Please enter amount to withdraw!");
     }
   });
   if (!userInfo) {
