@@ -1,38 +1,50 @@
+const popup = document.querySelector(".popup");
+const retry = document.getElementById("retry");
 const container = document.getElementById("container");
 const showAttempts = document.getElementById("attempts");
 let attempts = 0;
-let visible = [];
-const fruits = ['apple', 'orange', 'banana', 'grapes', 'pineapple', 'watermelon', 'strawberry', 'avocado'];
+let selected = [];
+let found = 0;
+const fruits = [
+  "apple",
+  "orange",
+  "banana",
+  "grapes",
+  "pineapple",
+  "watermelon",
+  "strawberry",
+  "avocado",
+];
 let randomizedFruits = [];
 
 function checkMatch() {
-    const item1 = visible[0].querySelector('.back img').alt;
-    const item2 = visible[1].querySelector('.back img').alt;
-    return (item1===item2)?true:false;
+  const item1 = selected[0].querySelector(".back img").alt;
+  const item2 = selected[1].querySelector(".back img").alt;
+  return item1 === item2 ? true : false;
 }
 
 function findAll(item, array) {
-    let discovered = [];
-    for (const element of array) {
-        if (element===item) {
-            discovered.push(element);
-        }
+  let discovered = [];
+  for (const element of array) {
+    if (element === item) {
+      discovered.push(element);
     }
-    return discovered;
+  }
+  return discovered;
 }
 
 while (randomizedFruits.length < 16) {
-    const index = Math.floor(Math.random()*fruits.length);
-    if (findAll(fruits[index], randomizedFruits).length<2) {
-        randomizedFruits.push(fruits[index]);
-    }
+  const index = Math.floor(Math.random() * fruits.length);
+  if (findAll(fruits[index], randomizedFruits).length < 2) {
+    randomizedFruits.push(fruits[index]);
+  }
 }
 
 for (const fruit of randomizedFruits) {
-    const card = document.createElement('div');
-    card.className = "card";
-    card.style.transform = "rotateY(0deg)";
-    card.innerHTML = `
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.transform = "rotateY(0deg)";
+  card.innerHTML = `
         <div class="face front">
             <h2>FRONT</h2>
         </div>
@@ -40,30 +52,43 @@ for (const fruit of randomizedFruits) {
             <img src="../assets/${fruit}.png" alt="${fruit}"/>
         </div>
     `;
-    container.appendChild(card);
-    card.addEventListener('click', ()=>{
-        switch (card.style.transform) {
-            case "rotateY(0deg)":
-                card.style.transform = "perspective(200px) rotateY(-180deg)";
-                visible.push(card);
-                break;
-            default:
-                card.style.transform = "rotateY(0deg)";
-                visible.splice(visible.indexOf(card), 1);
-                break;
+  container.appendChild(card);
+  card.addEventListener("click", () => {
+    switch (card.style.transform) {
+      case "rotateY(0deg)":
+        card.style.transform = "perspective(200px) rotateY(-180deg)";
+        selected.push(card);
+        break;
+      default:
+        card.style.transform = "rotateY(0deg)";
+        selected.splice(selected.indexOf(card), 1);
+        break;
+    }
+    if (selected.length >= 2 && checkMatch()) {
+      found++;
+      attempts++;
+      showAttempts.innerHTML = attempts;
+      if (found >= 1) {
+        document.getElementById("accuracy").innerHTML = Math.round(
+          (found * 100) / attempts
+        );
+        popup.style.visibility = "visible";
+        popup.style.animation = "riseIn 1s ease-out";
+      }
+      selected.splice(0);
+    } else if (selected.length >= 2) {
+      attempts++;
+      showAttempts.innerHTML = attempts;
+      setTimeout(() => {
+        for (item of selected) {
+          item.style.transform = "rotateY(0deg)";
         }
-        if (visible.length >=2 && checkMatch()) {
-            console.log("It's a match!!");
-            visible.splice(0);
-        } else if (visible.length >= 2 ) {
-            attempts++;
-            showAttempts.innerHTML = attempts;
-            setTimeout(()=>{
-                for (item of visible) {
-                    item.style.transform = "rotateY(0deg)";
-                }
-                visible.splice(0);
-            }, 1000);
-        }
-    });
+        selected.splice(0);
+      }, 1000);
+    }
+  });
 }
+
+retry.addEventListener("click", () => {
+  window.location.reload();
+});

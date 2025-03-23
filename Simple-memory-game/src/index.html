@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple memory game</title>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
     <script src="./scripts/index.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>How good is your memory?</h1>
-        <h2>Attempts used: <span id="attempts">0</span></h2>
+      <h1>How good is your memory?</h1>
+      <h2>Attempts used: <span id="attempts">0</span></h2>
     </header>
     <main>
-        <div id="container">
-        </div>
+      <div id="container"></div>
+      <div class="popup">
+        <h1>Congratulations!</h1>
+        <h2>Score accuracy: <span id="accuracy">80</span>%</h2>
+        <button id="retry"><span class="material-icons">replay</span></button>
+      </div>
     </main>
-</body>
+  </body>
 </html>
