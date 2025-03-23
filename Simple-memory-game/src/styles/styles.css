@@ -57,6 +57,11 @@ main {
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
+  cursor: pointer;
+}
+.front .material-icons {
+  font-size: 2em;
+  color: #23c;
 }
 .back {
   transform: rotateY(180deg);
@@ -84,7 +89,6 @@ img {
   color: #fff;
   background-color: #32be1e;
   visibility: hidden;
-  /* animation: riseIn 1s ease-out; */
 }
 .popup h1 {
   font-style: italic;

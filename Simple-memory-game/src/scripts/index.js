@@ -46,7 +46,7 @@ for (const fruit of randomizedFruits) {
   card.style.transform = "rotateY(0deg)";
   card.innerHTML = `
         <div class="face front">
-            <h2>FRONT</h2>
+            <h2><span class="material-icons">psychology</span></h2>
         </div>
         <div class="face back">
             <img src="../assets/${fruit}.png" alt="${fruit}"/>
@@ -68,7 +68,7 @@ for (const fruit of randomizedFruits) {
       found++;
       attempts++;
       showAttempts.innerHTML = attempts;
-      if (found >= 1) {
+      if (found >= 8) {
         document.getElementById("accuracy").innerHTML = Math.round(
           (found * 100) / attempts
         );
